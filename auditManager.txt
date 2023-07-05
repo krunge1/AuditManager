@@ -1,4 +1,3 @@
-# AuditManager
 Audit Manager is an website application that helps the financial audit team keep their audit requests in one place and organized. The entity being audited can view the requested items with details and due dates. Also, the entity can upload the required documentation such as a pdf or excel file.  Request status' can be updated from open, in progress, complete.  The MVP will allow for standard create, read, edit, and deletion of requests. Users will hold equal security features with access in MVP.  The website will be built using Java as its base language and using the Spring framework. Front-end styling will rely heavily on Bootstrap.
 
 MVP Feature List:
