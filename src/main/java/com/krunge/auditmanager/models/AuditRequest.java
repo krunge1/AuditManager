@@ -50,7 +50,7 @@ public class AuditRequest {
     @Size(min=3, message="Audit Request must be at least 3 characters")
     private String auditRequest;
     
-    @NotEmpty(message="Details is required!")
+    @NotEmpty(message="Details are required!")
     @Size(min=3, message="Details must be at least 5 characters")
     private String details;
     
