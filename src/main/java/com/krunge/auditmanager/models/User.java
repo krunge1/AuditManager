@@ -1,12 +1,15 @@
 package com.krunge.auditmanager.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -55,6 +58,11 @@ public class User {
         this.updatedAt = new Date();
     }
     
+//  One to Many
+  @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+  // here is where cascade type delete, cascade to other side of relationship
+  private List<AuditRequest> auditrequests;
+  
 //Constructor
     public User( ) {}
 
@@ -94,6 +102,12 @@ public class User {
 	}
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+	public List<AuditRequest> getAuditrequests() {
+		return auditrequests;
+	}
+	public void setAuditrequests(List<AuditRequest> auditrequests) {
+		this.auditrequests = auditrequests;
 	}
 
     

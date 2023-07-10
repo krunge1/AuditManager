@@ -44,7 +44,7 @@ public class UserController {
 		
 		
 		session.setAttribute("userId", user.getId());
-		return "redirect:/audits";
+		return "redirect:/requests";
 	}
 	
 	@PostMapping("/login")
@@ -68,7 +68,7 @@ public class UserController {
 		}	
 				
 		session.setAttribute("userId", u.getId());
-		return "redirect:/audits";
+		return "redirect:/requests";
 	}
 
 }
