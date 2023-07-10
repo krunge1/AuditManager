@@ -10,5 +10,5 @@ import com.krunge.auditmanager.models.AuditRequest;
 public interface AuditRequestRepository extends CrudRepository <AuditRequest, Long>{
 	List <AuditRequest> findAll();
 	List <AuditRequest> findAllByUser(Long userId);
-	Optional <AuditRequest> findByAuditRequest(String auditRequest);
+	Optional <AuditRequest> findByRequest(String request);
 }

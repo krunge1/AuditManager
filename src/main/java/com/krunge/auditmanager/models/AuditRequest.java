@@ -48,7 +48,7 @@ public class AuditRequest {
 //Unique Model Items
     @NotEmpty(message="Audit Request is required!")
     @Size(min=3, message="Audit Request must be at least 3 characters")
-    private String auditRequest;
+    private String request;
     
     @NotEmpty(message="Details are required!")
     @Size(min=3, message="Details must be at least 5 characters")
@@ -78,11 +78,12 @@ public class AuditRequest {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getAuditRequest() {
-		return auditRequest;
+
+	public String getRequest() {
+		return request;
 	}
-	public void setAuditRequest(String auditRequest) {
-		this.auditRequest = auditRequest;
+	public void setRequest(String request) {
+		this.request = request;
 	}
 	public String getDetails() {
 		return details;

@@ -26,11 +26,11 @@
 			<a href="/requests">Home</a> <a href="/logout">Logout</a>
 		</div>
 		<div class="header_box_justified">
-			<h2>New Request</h2>
+			<h2>${auditRequest.request}</h2>
 		</div>
 	</div>
 	<div class="form_box">
-		<form:form action="/requests/create" method="post" modelAttribute="auditRequest">
+		<form:form action="/requests/${id}/edit" method="put" modelAttribute="auditRequest">
 			<div class="mb-3 row">
 				<form:label path="request" class="form-label col">Request:</form:label>
 				<form:errors path="request" class="text-danger" />
@@ -60,8 +60,9 @@
 			</div>
 			<div class="mb-3 header_line_group">
 				<form:input path="user" type="hidden" value="${user.id}" />
-				<a href="/requests" class="btn btn-danger">Cancel</a>
-				<button type="submit" class="btn btn-primary" value="submit_form">Create Request</button>
+				<a href="/requests/${id}" class="btn btn-danger">Cancel</a>
+				<a href="/requests/${id}/delete" class="btn btn-danger">Delete</a>
+				<button type="submit" class="btn btn-primary" value="submit_form">Update Request</button>
 			</div>
 		</form:form>
 	</div>

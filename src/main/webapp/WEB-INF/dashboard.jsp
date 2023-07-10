@@ -41,7 +41,7 @@
 			<tbody>
 				<c:forEach var="auditRequest" items="${auditRequest}">
 					<tr>
-						<td><a href="/shows/${auditRequest.id}">${auditRequest.auditRequest}</a></td>
+						<td><a href="/requests/${auditRequest.id}">${auditRequest.request}</a></td>
 						<td>${auditRequest.dueDate}</td>
 						<td>${auditRequest.status}</td>
 					</tr>
