@@ -25,12 +25,12 @@ public class AuditRequestService {
 	}
 //Create or Update Audit Request
 	public AuditRequest createOrUpdate (AuditRequest auditRequest, BindingResult result) {
-		//Test if Audit Request exists in DB
-		Optional<AuditRequest>potentialAuditRequest = auditRequestRepo.findByRequest(auditRequest.getRequest());
-		if(potentialAuditRequest.isPresent()) {
-			result.rejectValue("request", "requestMatch", "Audit Request already exists");
-			return null;
-		}
+//		Test if Audit Request exists in DB
+//		Optional<AuditRequest>potentialAuditRequest = auditRequestRepo.findByRequest(auditRequest.getRequest());
+//		if(potentialAuditRequest.isPresent()) {
+//			result.rejectValue("request", "requestMatch", "Audit Request already exists");
+//			return null;
+//		}
 		if(result.hasErrors()) {
 			return null;
 		}else {

@@ -1,5 +1,7 @@
 package com.krunge.auditmanager.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.krunge.auditmanager.models.AuditRequest;
+import com.krunge.auditmanager.models.Comment;
 import com.krunge.auditmanager.models.User;
 import com.krunge.auditmanager.services.AuditRequestService;
+import com.krunge.auditmanager.services.CommentService;
 import com.krunge.auditmanager.services.UserService;
 
 @Controller
@@ -27,6 +31,9 @@ public class AuditRequestController {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private CommentService commentService;
 	
 //Gets
 	//Get method to render the new Audit Request creation page
@@ -56,9 +63,11 @@ public class AuditRequestController {
 		Long userId = (Long) session.getAttribute("userId");
 		if(userId==null) {
 			return "redirect:/";
-		}	
+		}
+		List<Comment> comment = commentService.getAll();
 		model.addAttribute("auditRequest", auditRequestService.getOne(auditRequestId));
 		model.addAttribute("user", userService.getOne(userId));
+		model.addAttribute("comment", comment);
 		return "viewAuditRequest.jsp";
 	 }
 	
@@ -139,6 +148,29 @@ public class AuditRequestController {
 		return "redirect:/requests";
 	}
 	
+	//Put method to edit Audit Request Status
+	@PutMapping("/{id}/statusUpdate")
+	public String pEditAuditRequestStatus(
+			@PathVariable("id") Long auditRequestId,
+			@Valid @ModelAttribute("auditRequest") AuditRequest auditRequest,
+			BindingResult result,
+			Model model,
+			HttpSession session
+			) {
+		Long userId = (Long) session.getAttribute("userId");
+		User user = userService.getOne(userId);
+		List<Comment> comment = commentService.getByAuditRequestId(auditRequestId);
+		model.addAttribute(user);
+		model.addAttribute(comment);
+		//Service call and tests for database requirements
+		AuditRequest r = auditRequestService.createOrUpdate(auditRequest, result);
+		if(r == null) {
+			model.addAttribute("user", userService.getOne(userId));
+			return "editAuditRequest.jsp";
+		}
+		return "redirect:/requests/{id}";
+	}
+		
 //REQUESTS
 	//Request method to delete an Audit Request
 	@RequestMapping("/{id}/delete")

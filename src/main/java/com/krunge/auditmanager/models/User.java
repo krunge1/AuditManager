@@ -60,8 +60,10 @@ public class User {
     
 //  One to Many
   @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-  // here is where cascade type delete, cascade to other side of relationship
   private List<AuditRequest> auditrequests;
+  
+  @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+  private List<Comment> comments;
   
 //Constructor
     public User( ) {}
@@ -108,6 +110,12 @@ public class User {
 	}
 	public void setAuditrequests(List<AuditRequest> auditrequests) {
 		this.auditrequests = auditrequests;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
     
