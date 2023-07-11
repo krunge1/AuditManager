@@ -64,10 +64,11 @@ public class AuditRequestController {
 		if(userId==null) {
 			return "redirect:/";
 		}
-		List<Comment> comment = commentService.getAll();
+		List<Comment> comments = commentService.getAll();
 		model.addAttribute("auditRequest", auditRequestService.getOne(auditRequestId));
 		model.addAttribute("user", userService.getOne(userId));
-		model.addAttribute("comment", comment);
+		model.addAttribute("comment", new Comment());
+		model.addAttribute("comments", comments);
 		return "viewAuditRequest.jsp";
 	 }
 	
@@ -120,6 +121,31 @@ public class AuditRequestController {
 	return "redirect:/requests";
 	}
 	
+	@PostMapping("/{id}/createComment")
+	public String pNewComment(
+			@PathVariable("id") Long auditRequestId,
+			@Valid @ModelAttribute("comment") Comment comment,
+			BindingResult result,
+			Model model,
+			HttpSession session
+			) {
+		Long userId = (Long) session.getAttribute("userId");
+		User user = userService.getOne(userId);
+		model.addAttribute(user);
+		//New Audit Request form tests
+		if(result.hasErrors()) {
+			model.addAttribute("user", userService.getOne(userId));
+			return "viewAuditRequest.jsp";
+		}
+		//Service call and tests for database requirements
+		Comment c = commentService.createOrUpdate(comment, result);
+		if (c == null) {
+			model.addAttribute("user", userService.getOne(userId));
+			return "viewAuditRequest.jsp";
+		}
+		return "redirect:/requests/{id}";
+	}
+	
 //PUTS
 	//Put method to edit Audit Request
 	@PutMapping("/{id}/edit")
@@ -159,9 +185,9 @@ public class AuditRequestController {
 			) {
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.getOne(userId);
-		List<Comment> comment = commentService.getByAuditRequestId(auditRequestId);
+		List<Comment> comments = commentService.getByAuditRequestId(auditRequestId);
 		model.addAttribute(user);
-		model.addAttribute(comment);
+		model.addAttribute(comments);
 		//Service call and tests for database requirements
 		AuditRequest r = auditRequestService.createOrUpdate(auditRequest, result);
 		if(r == null) {

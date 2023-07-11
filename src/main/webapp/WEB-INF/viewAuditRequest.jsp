@@ -75,11 +75,17 @@
 	</div>
 	<div class="container form_box border border-dark">
 		<h2>Comments</h2>
-		<form:form action="/requests/${auditRequest.id}/addComment" method="post" modelAttribute="${comment}">
+		<form:form action="/requests/${auditRequest.id}/createComment" method="post" modelAttribute="comment">
 			<form:label path="text">Add a Comment:</form:label>
+			<form:errors path="text" class="text-danger" />
 			<form:textarea path="text" rows="3" class="col" />
 			<button type="submit" class="btn btn-primary" value="submit_form">Post Comment</button>
 		</form:form>
+		<c:forEach var="comments" items="${comments}">
+			<tr>
+				<td>${comments.text}</td>
+			</tr>
+		</c:forEach>
 	</div>
 </body>
 </html>
