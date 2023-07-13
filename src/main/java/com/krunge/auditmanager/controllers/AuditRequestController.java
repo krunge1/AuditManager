@@ -1,5 +1,6 @@
 package com.krunge.auditmanager.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -35,13 +36,14 @@ public class AuditRequestController {
 	@Autowired
 	private CommentService commentService;
 	
+
 //Gets
 	//Get method to render the new Audit Request creation page
 	@GetMapping("/new")
 	public String rNewAuditRequest(
 			Model model,
 			HttpSession session
-			) {
+			){
 		//Tests if user is logged in. Returns to login page if not in session.
 		Long userId = (Long) session.getAttribute("userId");
 		if(userId==null) {
@@ -58,7 +60,7 @@ public class AuditRequestController {
 			@PathVariable("id") Long auditRequestId,
 			HttpSession session,
 			Model model
-			) {
+			) throws IOException {
 		//Tests if user is logged in. Returns to login page if not in session.
 		Long userId = (Long) session.getAttribute("userId");
 		if(userId==null) {
@@ -131,6 +133,7 @@ public class AuditRequestController {
 			) {
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.getOne(userId);
+		
 		model.addAttribute(user);
 		//New Audit Request form tests
 		if(result.hasErrors()) {
@@ -174,28 +177,6 @@ public class AuditRequestController {
 		return "redirect:/requests";
 	}
 	
-	//Put method to edit Audit Request Status
-	@PutMapping("/{id}/statusUpdate")
-	public String pEditAuditRequestStatus(
-			@PathVariable("id") Long auditRequestId,
-			@Valid @ModelAttribute("auditRequest") AuditRequest auditRequest,
-			BindingResult result,
-			Model model,
-			HttpSession session
-			) {
-		Long userId = (Long) session.getAttribute("userId");
-		User user = userService.getOne(userId);
-		List<Comment> comments = commentService.getByAuditRequestId(auditRequestId);
-		model.addAttribute(user);
-		model.addAttribute(comments);
-		//Service call and tests for database requirements
-		AuditRequest r = auditRequestService.createOrUpdate(auditRequest, result);
-		if(r == null) {
-			model.addAttribute("user", userService.getOne(userId));
-			return "editAuditRequest.jsp";
-		}
-		return "redirect:/requests/{id}";
-	}
 		
 //REQUESTS
 	//Request method to delete an Audit Request

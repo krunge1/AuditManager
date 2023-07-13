@@ -37,6 +37,13 @@
 				<form:input path="request" class="col" />
 			</div>
 			<div class="mb-3 row">
+				<form:select path="status" class="col">
+					<form:option value="Open" label="Open"/>
+					<form:option value="In-Progress" label="In-Progress"/>
+					<form:option value="Complete" label="Complete"/>
+				</form:select>
+			</div>
+			<div class="mb-3 row">
 				<form:label path="details" class="form-label col">Details:</form:label>
 				<form:errors path="details" class="text-danger" />
 				<form:textarea path="details" rows="3" class="col" />

@@ -36,20 +36,12 @@
 			<p class="col">
 				<strong><c:out value="${auditRequest.user.userName}" /><c:out value="${auditRequest.request}" /></strong>
 			</p>
-			<form:form action="/requests/${id}/statusUpdate" method="put" modelAttribute="auditRequest">
-				<form:select path="status" class="col">
-					<form:option value="Open" label="Open"/>
-					<form:option value="In-Progress" label="In-Progress"/>
-					<form:option value="Complete" label="Complete"/>
-				</form:select>
-				<form:input path="request" type="hidden" value="${auditRequest.request}" />
-				<form:input path="details" type="hidden" value="${auditRequest.details}" />
-				<form:input path="dueDate" type="hidden" value="${auditRequest.dueDate}" />
-				<form:input path="accountType" type="hidden" value="${auditRequest.accountType}" />
-				<form:input path="user" type="hidden" value="${auditRequest.user.id}" />
-				
-				<button type="submit" class="btn btn-primary" value="submit_form">Update Status</button>
-			</form:form>
+			<p class="col">
+				<strong>Status: </strong>
+			</p>
+			<p class="col">
+				<strong><c:out value="${auditRequest.status}"/></strong>
+			</p>
 		</div>
 		<div class="row">
 			<p class="col">Details:</p>
@@ -75,17 +67,15 @@
 	</div>
 	<div class="container form_box border border-dark">
 		<h2>Comments</h2>
+		<c:forEach var="comments" items="${comments}">
+				<p>${comments.text}</p>
+		</c:forEach>
 		<form:form action="/requests/${auditRequest.id}/createComment" method="post" modelAttribute="comment">
 			<form:label path="text">Add a Comment:</form:label>
 			<form:errors path="text" class="text-danger" />
 			<form:textarea path="text" rows="3" class="col" />
 			<button type="submit" class="btn btn-primary" value="submit_form">Post Comment</button>
 		</form:form>
-		<c:forEach var="comments" items="${comments}">
-			<tr>
-				<td>${comments.text}</td>
-			</tr>
-		</c:forEach>
 	</div>
 </body>
 </html>
