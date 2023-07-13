@@ -16,12 +16,12 @@ public class FileDataService {
 		FileData newFile = FileData.builder()
 				.name(file.getOriginalFilename())
 				.filetype(file.getContentType())
-				.filePath(file.getOriginalFilename());
+				.filePath(file.getOriginalFilename())
 				.build();
 		this.fileDataRepo.save(newFile);
 		if(newFile != null) {
 			System.out.println(file.getOriginalFilename());
-			return "Upload Successfull"+ file.getOriginalFilename();
+			return "Upload Successful"+ file.getOriginalFilename();
 		}
 		return null;
 	}
