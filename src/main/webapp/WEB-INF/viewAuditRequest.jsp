@@ -19,24 +19,25 @@
 	type="text/javascript"></script>
 </head>
 <body>
-	<div class="header">
-		<div class="header_line_group">
+	<div class="text-bg-primary p-3">
+		<div class="d-flex justify-content-around">
 			<h1>Big4 Audit Manager</h1>
-			<a href="/requests">Home</a> <a href="/logout">Logout</a>
-		</div>
-		<div class="header_box_justified">
-			<h2>Request</h2>
+			<div >
+				<a class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="/requests">Home</a> 
+				<a class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="/requests/new">New Request</a>
+				<a class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="/logout">Logout</a>
+			</div>
 		</div>
 	</div>
-	<div class="container form_box border border-dark">
+	<div class="container-md form_box border border-dark mt-3">
 		<div class="row">
-			<p class="col">
+			<p class="col-lg-3">
 				<strong>Request: </strong>
 			</p>
 			<p class="col">
-				<strong><c:out value="${auditRequest.requestUser.userName}" /><c:out value="${auditRequest.request}" /></strong>
+				<strong><c:out value="${auditRequest.request}" /></strong>
 			</p>
-			<p class="col">
+			<p class="col-lg-3">
 				<strong>Status: </strong>
 			</p>
 			<p class="col">
@@ -44,51 +45,54 @@
 			</p>
 		</div>
 		<div class="row">
-			<p class="col">Details:</p>
+			<p class="col-lg-3">Details:</p>
 			<p class="col">
 				<c:out value="${auditRequest.details}" />
 			</p>
 		</div>
 		<div class="row">
-			<p class="col">Due Date:</p>
+			<p class="col-lg-3">Due Date:</p>
 			<p class="col">
-				<c:out value="${auditRequest.dueDate}" />
+				<fmt:formatDate value="${auditRequest.dueDate}" pattern= "MM/dd/yyyy" var="formattedDueDate"/>
+				<c:out value="${formattedDueDate}" />
 			</p>
 		</div>
 	</div>
-	<div class="form_box">
+	<div class="container-md mt-3 d-flex grid gap-3">
 		<c:choose>
 			<c:when test="${auditRequest.requestUser.id == userId}">
 				<form action="/requests/${auditRequest.id}/edit">
-					<button type="submit" class="btn btn-primary" value="submit_form">Edit</button>
+					<button type="submit" class="btn btn-primary p-2 g-col-6" value="submit_form">Edit</button>
+				</form>
+				<form action="/requests/${auditRequest.id}/delete">
+					<button type="submit" class="btn btn-danger p-2 g-col-6" value="submit_form">Delete</button>
 				</form>
 			</c:when>
 		</c:choose>
 	</div>
-	<div class="container form_box border border-dark">
-		<h2>Comments</h2>
+	<div class="container-md form_box mt-3 grid gap-3">
+		<h2 class="text-decoration-underline mt-5">Comments</h2>
 		<c:forEach var="requestComments" items="${requestComments}">
-				<p>${requestComments.text}</p>
+				<p>${requestComments.text} <span class="fw-bold">${requestComments.commentUser.userName}</span></p>
 		</c:forEach>
 		<form:form action="/requests/${auditRequest.id}/createComment" method="Post" modelAttribute="comment">
-			<form:label path="text">Add a Comment:</form:label>
 			<form:errors path="text" class="text-danger" />
-			<form:textarea path="text" rows="3" class="col" />
-			<button type="submit" class="btn btn-primary" value="New_Comment">Post Comment</button>
+			<form:textarea path="text" rows="3" class="col-lg-6" />
+			<button type="submit" class="btn btn-primary form_box mt-3 d-flex" value="New_Comment">Post Comment</button>
 		</form:form>
-			<div class="container form_box border border-dark">
+	</div>
+	<div class="container-md form_box mt-5 grid gap-3">
 	     <form:form action="/requests/${auditRequest.id}/uploadFile" method = "post"
 	         enctype = "multipart/form-data">
-	        <input type="file" name="file" />
-	        <input type = "submit" value = "Upload File" />
+	        <input type="file" name="file" class="form-control form-control-lg "/>
+	        <input type = "submit" value = "Upload File" class="btn btn-primary form_box mt-3 d-flex"/>
          </form:form>
-       		<h2>Files</h2>
+       		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 			<c:forEach var="requestFiles" items="${requestFiles}">
-					<a href="/requests/${requestFiles.name}" download>${requestFiles.name}</a>
+					<a href="/requests/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
 			</c:forEach>
 	</div>
-		
-	</div>
+	
 
 </body>
 </html>
