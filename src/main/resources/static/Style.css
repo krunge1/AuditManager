@@ -1,0 +1,40 @@
+.header {
+	width: auto;
+	margin: 2em;
+}
+
+.header_line_group {
+	display: flex;
+	justify-content: space-around;
+	gap: 15px;
+}
+
+.header_box_justified {
+	margin: auto;
+	width: 60%;
+}
+
+.blue_text {
+	color: blue;
+}
+
+.box_sizing {
+	margin: auto;
+	width: 75%;
+	padding: 2em;
+}
+
+.form_box {
+	margin: auto;
+	width: 60%;
+	padding: 2em;
+}
+
+.border {
+	border: 25px solid black;
+}
+
+.display_flex {
+	display: flex;
+	justify-content: space-around;
+}

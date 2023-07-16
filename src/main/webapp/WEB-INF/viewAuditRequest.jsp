@@ -34,7 +34,7 @@
 				<strong>Request: </strong>
 			</p>
 			<p class="col">
-				<strong><c:out value="${auditRequest.user.userName}" /><c:out value="${auditRequest.request}" /></strong>
+				<strong><c:out value="${auditRequest.requestUser.userName}" /><c:out value="${auditRequest.request}" /></strong>
 			</p>
 			<p class="col">
 				<strong>Status: </strong>
@@ -58,7 +58,7 @@
 	</div>
 	<div class="form_box">
 		<c:choose>
-			<c:when test="${auditRequest.user.id == userId}">
+			<c:when test="${auditRequest.requestUser.id == userId}">
 				<form action="/requests/${auditRequest.id}/edit">
 					<button type="submit" class="btn btn-primary" value="submit_form">Edit</button>
 				</form>
@@ -67,15 +67,28 @@
 	</div>
 	<div class="container form_box border border-dark">
 		<h2>Comments</h2>
-		<c:forEach var="comments" items="${comments}">
-				<p>${comments.text}</p>
+		<c:forEach var="requestComments" items="${requestComments}">
+				<p>${requestComments.text}</p>
 		</c:forEach>
-		<form:form action="/requests/${auditRequest.id}/createComment" method="post" modelAttribute="comment">
+		<form:form action="/requests/${auditRequest.id}/createComment" method="Post" modelAttribute="comment">
 			<form:label path="text">Add a Comment:</form:label>
 			<form:errors path="text" class="text-danger" />
 			<form:textarea path="text" rows="3" class="col" />
-			<button type="submit" class="btn btn-primary" value="submit_form">Post Comment</button>
+			<button type="submit" class="btn btn-primary" value="New_Comment">Post Comment</button>
 		</form:form>
+			<div class="container form_box border border-dark">
+	     <form:form action="/requests/${auditRequest.id}/uploadFile" method = "post"
+	         enctype = "multipart/form-data">
+	        <input type="file" name="file" />
+	        <input type = "submit" value = "Upload File" />
+         </form:form>
+       		<h2>Files</h2>
+			<c:forEach var="requestFiles" items="${requestFiles}">
+					<a href="/requests/${requestFiles.name}" download>${requestFiles.name}</a>
+			</c:forEach>
 	</div>
+		
+	</div>
+
 </body>
 </html>

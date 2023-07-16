@@ -13,12 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
 import javax.validation.constraints.NotEmpty;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="comment")
+@Table(name="comments")
 public class Comment {
 	//Standard Model Items
 	@Id
@@ -46,20 +46,20 @@ public class Comment {
     @NotEmpty(message="Ope your comment is blank.")
     private String text;
     
-  //Constructor
-    public Comment() {}
-    
-  //Many to One
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
-    
-  //Many to One
+    //Many to One
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="auditRequest_id")
-    private AuditRequest auditRequest;
+    private AuditRequest requestComment;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User commentUser;
 
-  //Getters and Setters
+//Constructor
+    public Comment() {}
+ 
+//Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
@@ -76,20 +76,20 @@ public class Comment {
 		this.text = text;
 	}
 
-	public User getUser() {
-		return user;
+	public AuditRequest getRequestComment() {
+		return requestComment;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setRequestComment(AuditRequest requestComment) {
+		this.requestComment = requestComment;
 	}
 
-	public AuditRequest getAuditRequest() {
-		return auditRequest;
+	public User getCommentUser() {
+		return commentUser;
 	}
 
-	public void setAuditRequest(AuditRequest auditRequest) {
-		this.auditRequest = auditRequest;
+	public void setCommentUser(User commentUser) {
+		this.commentUser = commentUser;
 	}
 
 	public Date getCreatedAt() {
@@ -99,6 +99,6 @@ public class Comment {
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-        
+
 }
 

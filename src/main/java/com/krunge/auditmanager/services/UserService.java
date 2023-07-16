@@ -40,12 +40,12 @@ public class UserService {
     		result.rejectValue("confirmPassword", "Matches", "Passwords must match");
     	}
     	//Password meet security requirements
-        // digit + lowercase char + uppercase char + symbol
-        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$ %^&*-]).{8,}$";
+        // digit + lowercase char + uppercase char
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(user.getPassword());
         if(matcher.matches()== false){
-    		result.rejectValue("password", "Validation", "Passwords must be at least eight characters long, include one lower case letter, one upper case letter, and a special character ");
+    		result.rejectValue("password", "Validation", "Passwords must be at least eight characters long, include one lower case letter, one upper case letter, and a number ");
         }  	
     	
     	if(result.hasErrors()) {
@@ -75,4 +75,5 @@ public class UserService {
         }
         return user;
     }
+ 
 }

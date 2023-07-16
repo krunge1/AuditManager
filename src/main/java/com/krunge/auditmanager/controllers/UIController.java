@@ -45,7 +45,7 @@ public class UIController {
 			return "redirect:/";
 		}
 		User user = userService.getOne(userId);
-		List<AuditRequest> auditRequest = auditRequestService.getAll();
+		List<AuditRequest> auditRequest = auditRequestService.getAllAuditRequestsSortedByStatus();
 		model.addAttribute("user", user);
 		model.addAttribute("auditRequest", auditRequest);
 		return "dashboard.jsp";

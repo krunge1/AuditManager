@@ -66,7 +66,7 @@
 				</form:select>
 			</div>
 			<div class="mb-3 header_line_group">
-				<form:input path="user" type="hidden" value="${user.id}" />
+				<form:input path="requestUser" type="hidden" value="${user.id}" />
 				<a href="/requests/${id}" class="btn btn-danger">Cancel</a>
 				<a href="/requests/${id}/delete" class="btn btn-danger">Delete</a>
 				<button type="submit" class="btn btn-primary" value="submit_form">Update Request</button>

@@ -59,7 +59,7 @@
 				</form:select>
 			</div>
 			<div class="mb-3 header_line_group">
-				<form:input path="user" type="hidden" value="${user.id}" />
+				<form:input path="requestUser" type="hidden" value="${user.id}" />
 				<a href="/requests" class="btn btn-danger">Cancel</a>
 				<button type="submit" class="btn btn-primary" value="submit_form">Create Request</button>
 			</div>

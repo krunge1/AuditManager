@@ -67,25 +67,28 @@ public class AuditRequest {
     private String status;
     
 //  One to Many
-  @OneToMany(mappedBy="auditRequest", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  @OneToMany(mappedBy="requestComment", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<Comment> comments;
+  
+  @OneToMany(mappedBy="requestFile", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+  private List<FileData> fileData;
   
 //Many to One
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private User user;
+    private User requestUser;
     
 //Constructor
     public AuditRequest() {}
 
 //Getters and Setters
+    
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getRequest() {
 		return request;
 	}
@@ -116,23 +119,29 @@ public class AuditRequest {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public List<Comment> getComments() {
 		return comments;
 	}
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-      
+	public List<FileData> getFileData() {
+		return fileData;
+	}
+	public void setFileData(List<FileData> fileData) {
+		this.fileData = fileData;
+	}
+	public User getRequestUser() {
+		return requestUser;
+	}
+	public void setRequestUser(User requestUser) {
+		this.requestUser = requestUser;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
 }

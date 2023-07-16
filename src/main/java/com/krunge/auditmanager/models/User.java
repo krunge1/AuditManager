@@ -59,16 +59,19 @@ public class User {
     }
     
 //  One to Many
-  @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="requestUser", fetch=FetchType.LAZY)
   private List<AuditRequest> auditrequests;
   
-  @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy="fileUser", fetch=FetchType.LAZY)
+  private List<FileData> fileData;
+
+  @OneToMany(mappedBy="commentUser", fetch=FetchType.LAZY)
   private List<Comment> comments;
-  
+
 //Constructor
     public User( ) {}
-
-    //Getters and Setters
+    
+//Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -99,17 +102,17 @@ public class User {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
 	public List<AuditRequest> getAuditrequests() {
 		return auditrequests;
 	}
 	public void setAuditrequests(List<AuditRequest> auditrequests) {
 		this.auditrequests = auditrequests;
+	}
+	public List<FileData> getFileData() {
+		return fileData;
+	}
+	public void setFileData(List<FileData> fileData) {
+		this.fileData = fileData;
 	}
 	public List<Comment> getComments() {
 		return comments;
@@ -117,6 +120,10 @@ public class User {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
-    
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 }

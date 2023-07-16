@@ -18,6 +18,12 @@ public class AuditRequestService {
 	public List <AuditRequest> getAll(){
 		return auditRequestRepo.findAll();
 	}
+	
+//Get all Audit Requests sorted by Status
+	public List<AuditRequest> getAllAuditRequestsSortedByStatus() {
+	    return auditRequestRepo.findAllByOrderByStatusDesc();
+	}
+	
 //Get one Audit Request by ID
 	public AuditRequest getOne(Long id) {
 		return auditRequestRepo.findById(id).orElse(null);
@@ -38,7 +44,7 @@ public class AuditRequestService {
 	}
 //Get Audit Request by User Id
 	public List<AuditRequest> getByUserId(Long userId){
-		return auditRequestRepo.findAllByUser(userId);
+		return auditRequestRepo.findAllByRequestUserId(userId);
 	}
 //Delete Audit Request
 	public void deleteById(Long id) {

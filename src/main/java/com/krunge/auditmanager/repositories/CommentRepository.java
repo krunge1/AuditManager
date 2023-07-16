@@ -8,6 +8,6 @@ import com.krunge.auditmanager.models.Comment;
 
 public interface CommentRepository extends CrudRepository <Comment, Long>{
 	List <Comment> findAll();
-	List <Comment> findAllByAuditRequest(Long auditRequestId);
-	List <Comment> findAllByUser(Long userId);
+	List <Comment> findAllByRequestCommentId(Long auditRequestId);
+	List <Comment> findAllByCommentUserId(Long userId);
 }
