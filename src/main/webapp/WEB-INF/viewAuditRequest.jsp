@@ -89,7 +89,7 @@
          </form:form>
        		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 			<c:forEach var="requestFiles" items="${requestFiles}">
-					<a href="/requests/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
+					<a href="/requests/download/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
 			</c:forEach>
 	</div>
 	
