@@ -1,8 +1,6 @@
 package com.krunge.auditmanager.controllers;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,8 +9,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,18 +40,18 @@ import com.krunge.auditmanager.services.UserService;
 public class AuditRequestController {
 	@Autowired
 	private AuditRequestService auditRequestService;
-	
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private FileDataService fileDataService;
-	
+
 	private static String UPLOAD_FOLDER = "src/main/resources/static/AuditItems";
-	
+
 
 //Gets
 	//Get method to render the new Audit Request creation page
@@ -63,12 +64,12 @@ public class AuditRequestController {
 		Long userId = (Long) session.getAttribute("userId");
 		if(userId==null) {
 			return "redirect:/";
-		}	
+		}
 		model.addAttribute("user", userService.getOne(userId));
 		model.addAttribute("auditRequest", new AuditRequest());
 		return "newAuditRequest.jsp";
 	}
-	
+
 	//Get method to view an Audit Request page
 	@GetMapping("/{id}")
 	public String rAuditRequest(
@@ -90,7 +91,7 @@ public class AuditRequestController {
 		model.addAttribute("requestFiles", requestFiles);
 		return "viewAuditRequest.jsp";
 	 }
-	
+
 	//Get method to view edit page of an Audit Request
 	@GetMapping("/{id}/edit")
 	public String rEditAuditRequest(
@@ -113,45 +114,46 @@ public class AuditRequestController {
 		model.addAttribute("user", userService.getOne(userId));
 		return "editAuditRequest.jsp";
 	}
-	
-//	//Get method to download File
+
+	//Get method to download File
+	@GetMapping("/requests/download/{name}")
+	public ResponseEntity<Resource> dFileDownload(
+			@PathVariable("name") String name) {
+
+		Path filePath = Paths.get(UPLOAD_FOLDER, name);
+		Resource fileResource = new FileSystemResource(filePath.toFile());
+		System.out.println(fileResource);
+
+		if(((FileSystemResource) fileResource).exists()) {
+			String contentType = fileDataService.determineContentType(name);
+			 // Return the file as a response entity with appropriate headers
+	        return ResponseEntity.ok()
+	                .header("Content-Disposition", "attachment; filename=\"" + name + "\"")
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .body(fileResource);
+		}else {
+	        // Handle the case when the file does not exist
+	        return ResponseEntity.notFound().build();
+		}
+	}
+
 //	@GetMapping("/requests/{name}")
-//	public ResponseEntity<Resource> dFileDownload(
-//			@PathVariable("name") String name) {
+//    private static void dFileDownload(
+//		@PathVariable("name") String name,
+//		String downloads) {
+//        URL fileurl = null;
+//        try {
+//            fileurl = new URL(UPLOAD_FOLDER + name);
+//            System.out.println(fileurl);
+//            FileUtils.copyURLToFile(fileurl, new File(downloads));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //
-//		Path filePath = Paths.get(UPLOAD_FOLDER, name);
-//		Resource fileResource = (Resource) new FileSystemResource(filePath.toFile());
-//		
-//		if(((FileSystemResource) fileResource).exists()) {
-//			String contentType = fileDataService.determineContentType(name);
-//			 // Return the file as a response entity with appropriate headers
-//	        return ResponseEntity.ok()
-//	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + name + "\"")
-//	                .contentType(MediaType.parseMediaType(contentType))
-//	                .body(fileResource);
-//		}else {
-//	        // Handle the case when the file does not exist
-//	        return ResponseEntity.notFound().build();
-//		}
-//	}
-	
-	@GetMapping("/requests/{name}")
-    private static void dFileDownload(
-		@PathVariable("name") String name,
-		String downloads) {
-        URL fileurl = null;
-        try {
-            fileurl = new URL(UPLOAD_FOLDER + name);
-            System.out.println(fileurl);
-            FileUtils.copyURLToFile(fileurl, new File(downloads));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        System.out.println("File Downloaded Successfully with apache commons-io Operation \n");
-        
-    } 
-	
+//        System.out.println("File Downloaded Successfully with apache commons-io Operation \n");
+//
+//    }
+
 //POSTS
 	//Post method to initially create an Audit Request
 	@PostMapping("/create")
@@ -177,7 +179,7 @@ public class AuditRequestController {
 	}
 	return "redirect:/requests";
 	}
-	
+
 	//Post Method to create comment on audit request
 	@PostMapping("/{auditRequestId}/createComment")
 	public String pNewComment(
@@ -195,7 +197,7 @@ public class AuditRequestController {
 
 		return "redirect:/requests/{auditRequestId}";
 	}
-	
+
 	@PostMapping("/{auditRequestId}/uploadFile")
 	public String uploadFile(
 			@PathVariable("auditRequestId") Long auditRequestId,
@@ -206,7 +208,7 @@ public class AuditRequestController {
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.getOne(userId);
 		model.addAttribute(user);
-		
+
 		try {
 			byte[] bytes = file.getBytes();
 			Path path = Paths.get(UPLOAD_FOLDER, file.getOriginalFilename());
@@ -218,7 +220,7 @@ public class AuditRequestController {
 		}
 		return "redirect:/requests/{auditRequestId}";
 	}
-	
+
 //PUTS
 	//Put method to edit Audit Request
 	@PutMapping("/{id}/edit")
@@ -232,11 +234,11 @@ public class AuditRequestController {
 		Long userId = (Long) session.getAttribute("userId");
 		User user = userService.getOne(userId);
 		model.addAttribute(user);
-		
+
 		//Edit Audit Request tests
 		if(result.hasErrors()) {
 			model.addAttribute("user", userService.getOne(userId));
-			return "editAuditRequest.jsp";	
+			return "editAuditRequest.jsp";
 		}
 		//Service call and tests for database requirements
 		AuditRequest r = auditRequestService.createOrUpdate(auditRequest, result);
@@ -246,8 +248,8 @@ public class AuditRequestController {
 		}
 		return "redirect:/requests";
 	}
-	
-		
+
+
 //REQUESTS
 	//Request method to delete an Audit Request
 	@RequestMapping("/{id}/delete")
@@ -269,5 +271,5 @@ public class AuditRequestController {
 		auditRequestService.deleteById(auditRequestId);
 		return "redirect:/requests";
 	}
-	
+
 }
