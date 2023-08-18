@@ -30,14 +30,14 @@ public class AuditRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
-	
+
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
-    
+
 	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
@@ -52,37 +52,37 @@ public class AuditRequest {
     @NotEmpty(message="Audit Request is required!")
     @Size(min=3, message="Audit Request must be at least 3 characters")
     private String request;
-    
+
     @NotEmpty(message="Details are required!")
     @Size(min=3, message="Details must be at least 5 characters")
     private String details;
-    
+
     @NotNull(message="Due Date is required")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date dueDate;	    
-    
+	private Date dueDate;
+
     @NotEmpty(message="Account type is required")
     private String accountType;
 
     private String status;
-    
+
 //  One to Many
   @OneToMany(mappedBy="requestComment", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<Comment> comments;
-  
+
   @OneToMany(mappedBy="requestFile", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
   private List<FileData> fileData;
-  
+
 //Many to One
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User requestUser;
-    
+
 //Constructor
     public AuditRequest() {}
 
 //Getters and Setters
-    
+
 	public Long getId() {
 		return id;
 	}

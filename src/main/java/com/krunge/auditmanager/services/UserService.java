@@ -19,15 +19,15 @@ import com.krunge.auditmanager.repositories.UserRepository;
 public class UserService {
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	public List <User> getAll(){
 		return userRepo.findAll();
 	}
-	
+
 	public User getOne(Long id) {
 		return userRepo.findById(id).orElse(null);
 	}
-	
+
     public User createOrUpdate(User user, BindingResult result) {
     	//Test if user exists in DB
     	Optional<User> potentialUser = userRepo.findByEmail(user.getEmail());
@@ -44,10 +44,10 @@ public class UserService {
         String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(user.getPassword());
-        if(matcher.matches()== false){
+        if(!matcher.matches()){
     		result.rejectValue("password", "Validation", "Passwords must be at least eight characters long, include one lower case letter, one upper case letter, and a number ");
-        }  	
-    	
+        }
+
     	if(result.hasErrors()) {
     		return null;
     	}else {
@@ -57,7 +57,7 @@ public class UserService {
     		return userRepo.save(user);
     	}
     }
-    
+
     public User login(LoginUser loginUser, BindingResult result) {
     	//test if user is in DB
     	Optional<User> potentialUser = userRepo.findByEmail(loginUser.getEmail());
@@ -75,5 +75,5 @@ public class UserService {
         }
         return user;
     }
- 
+
 }

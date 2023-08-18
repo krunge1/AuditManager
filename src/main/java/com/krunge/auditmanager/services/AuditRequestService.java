@@ -13,17 +13,17 @@ import com.krunge.auditmanager.repositories.AuditRequestRepository;
 public class AuditRequestService {
 	@Autowired
 	private AuditRequestRepository auditRequestRepo;
-	
+
 //Get all Audit Requests
 	public List <AuditRequest> getAll(){
 		return auditRequestRepo.findAll();
 	}
-	
+
 //Get all Audit Requests sorted by Status
 	public List<AuditRequest> getAllAuditRequestsSortedByStatus() {
 	    return auditRequestRepo.findAllByOrderByStatusDesc();
 	}
-	
+
 //Get one Audit Request by ID
 	public AuditRequest getOne(Long id) {
 		return auditRequestRepo.findById(id).orElse(null);

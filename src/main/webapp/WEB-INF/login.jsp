@@ -14,14 +14,14 @@
 <meta charset="UTF-8">
 <title>Audit Manager</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/style.css">
 <script type="text/javascript" src="/script.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"
 	type="text/javascript"></script>
 </head>
 <body>
 	<div class="text-bg-primary p-3 text-center">
-		<h1 class="">Big 4 Audit Manager</h1>
+		<h1 class="purple_text">Big 4 Audit Manager</h1>
 	</div>
 	<div class="container text center mx-auto m-5">
 		<div class="row column-gap-5">

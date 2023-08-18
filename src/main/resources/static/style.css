@@ -9,13 +9,12 @@
     gap: 15px;
 }
 
-.header_box_justified{
-	margin: auto;
-    width: 60%;
-}
-
 .blue_text{
 	color: blue;
+}
+
+.purple_text{
+	color: purple;
 }
 
 .box_sizing{
@@ -31,7 +30,7 @@
 }
 
 .border{
-	border: 25px solid black;
+	border: 25px solid red;
 }
 
 .display_flex{

@@ -128,7 +128,7 @@ public class AuditRequestController {
 			String contentType = fileDataService.determineContentType(name);
 			 // Return the file as a response entity with appropriate headers
 	        return ResponseEntity.ok()
-	                .header("Content-Disposition", "attachment; filename=\"" + name + "\"")
+	                .header("HttpHeaders.Content-Disposition", "attachment; filename=\"" + name + "\"")
 	                .contentType(MediaType.parseMediaType(contentType))
 	                .body(fileResource);
 		}else {

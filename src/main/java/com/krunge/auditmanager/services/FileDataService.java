@@ -19,18 +19,18 @@ import com.krunge.auditmanager.repositories.UserRepository;
 public class FileDataService {
 	@Autowired
 	private FileDataRepository fileDataRepo;
-	
-	@Autowired 
+
+	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private AuditRequestRepository auditRequestRepo;
-	
+
 	public String uploadAuditFile(MultipartFile file, Long userId, Long auditRequestId) {
 		//Retrieve User and Audit Request
 		User user = userRepo.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 		AuditRequest auditRequest = auditRequestRepo.findById(auditRequestId).orElseThrow(() -> new IllegalArgumentException("Audit Request not found"));
-		
+
 		FileData newFile = FileData.builder()
 				.name(file.getOriginalFilename())
 				.filetype(file.getContentType())
@@ -45,12 +45,12 @@ public class FileDataService {
 		}
 		return null;
 	}
-	
+
 	//Get all Files
 		public List <FileData> getAll(){
 			return fileDataRepo.findAll();
 		}
-	
+
 	//Get by ID
 		public FileData getOne(Long id) {
 			return fileDataRepo.findById(id).orElse(null);
@@ -60,12 +60,12 @@ public class FileDataService {
 	public List<FileData> getByUserId(Long userId){
 		return fileDataRepo.findAllByFileUser(userId);
 	}
-	
+
 	//Get Files by Audit Request
 	public List<FileData> getAllByRequestId(Long auditRequestId){
 		return fileDataRepo.findAllByRequestFileId(auditRequestId);
 	}
-	
+
 	public String determineContentType(String fileName) {
 	    MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
 	    String contentType = fileTypeMap.getContentType(fileName);

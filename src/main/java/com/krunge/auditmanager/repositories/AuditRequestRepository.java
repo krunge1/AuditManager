@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.krunge.auditmanager.models.AuditRequest;
 
 public interface AuditRequestRepository extends CrudRepository <AuditRequest, Long>{
+	@Override
 	List <AuditRequest> findAll();
 	List <AuditRequest> findAllByRequestUserId(Long userId);
 	List<AuditRequest> findAllByOrderByStatusDesc();

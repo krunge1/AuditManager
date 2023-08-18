@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.krunge.auditmanager.models.Comment;
 
 public interface CommentRepository extends CrudRepository <Comment, Long>{
+	@Override
 	List <Comment> findAll();
 	List <Comment> findAllByRequestCommentId(Long auditRequestId);
 	List <Comment> findAllByCommentUserId(Long userId);

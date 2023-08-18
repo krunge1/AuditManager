@@ -22,7 +22,7 @@ public class UIController {
 	private UserService userService;
 	@Autowired
 	private AuditRequestService auditRequestService;
-	
+
 	@GetMapping("/")
 	public String rLoginReg (
 			Model model
@@ -31,7 +31,7 @@ public class UIController {
 		model.addAttribute("loginUser", new LoginUser());
 		return "login.jsp";
 	}
-	
+
 	@GetMapping("/logout")
 		public String pLogout(HttpSession session) {
 			session.setAttribute("userId", null);

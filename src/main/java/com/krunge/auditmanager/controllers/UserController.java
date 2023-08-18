@@ -20,7 +20,7 @@ import com.krunge.auditmanager.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
+
 	@PostMapping("/register")
 	public String pRegister(
 			@Valid @ModelAttribute("user")User user,
@@ -34,39 +34,39 @@ public class UserController {
 			model.addAttribute("loginUser", new LoginUser());
 			return "login.jsp";
 		}
-		
-	//Service call and tests for database requirements  
+
+	//Service call and tests for database requirements
 		User u = userService.createOrUpdate(user, result);
 		if(u == null) {
 			model.addAttribute("loginUser", new LoginUser());
 			return "login.jsp";
-		}	
-		
-		
+		}
+
+
 		session.setAttribute("userId", user.getId());
 		return "redirect:/requests";
 	}
-	
+
 	@PostMapping("/login")
 	public String pLogin(
 			@Valid @ModelAttribute("loginUser") LoginUser loginUser,
 			BindingResult result,
 			Model model,
 			HttpSession session) {
-	
+
 	//Login form tests
 		if(result.hasErrors()) {
 			model.addAttribute("user", new User());
 			return "login.jsp";
 		}
 
-	//Service call and tests for database requirements  
+	//Service call and tests for database requirements
 		User u = userService.login(loginUser, result);
 		if(u == null) {
 			model.addAttribute("user", new User());
 			return "login.jsp";
-		}	
-				
+		}
+
 		session.setAttribute("userId", u.getId());
 		return "redirect:/requests";
 	}

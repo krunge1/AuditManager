@@ -24,40 +24,40 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
-	
+
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
-    
+
 	@PrePersist
     protected void onCreate(){
     this.createdAt = new Date();
 	}
-	
+
     @PreUpdate
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
-    
+
   //Unique Model Items
     @NotEmpty(message="Ope your comment is blank.")
     private String text;
-    
+
     //Many to One
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="auditRequest_id")
     private AuditRequest requestComment;
-    
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User commentUser;
 
 //Constructor
     public Comment() {}
- 
+
 //Getters and Setters
 
 	public Long getId() {

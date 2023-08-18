@@ -13,7 +13,7 @@ import com.krunge.auditmanager.repositories.CommentRepository;
 public class CommentService {
 	@Autowired
 	private CommentRepository commentRepo;
-	
+
 	//Get all Comments
 		public List <Comment> getAll(){
 			return commentRepo.findAll();
@@ -26,7 +26,7 @@ public class CommentService {
 		public Comment createOrUpdate (Comment comment, BindingResult result) {
 			if(result.hasErrors()) {
 				return null;
-			}else {	
+			}else {
 				return commentRepo.save(comment);
 				}
 			}

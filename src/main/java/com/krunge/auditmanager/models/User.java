@@ -26,24 +26,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotEmpty(message="Username is required!")
     @Size(min=3, message="Username must be at least 3 characters")
     private String userName;
-    
+
     @NotEmpty(message="Email is required!")
     @Email(message="Please enter a valid email!")
     private String email;
-    
+
     @NotEmpty(message="Password is required!")
     @Size(min=8, message="Password must be at least 8 characters")
     private String password;
-    
+
     @Transient
     @NotEmpty(message="Confirm Password is required!")
     @Size(min=8, message="Password must be at least 8 characters")
     private String confirmPassword;
-  
+
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
@@ -57,11 +57,11 @@ public class User {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
-    
+
 //  One to Many
   @OneToMany(mappedBy="requestUser", fetch=FetchType.LAZY)
   private List<AuditRequest> auditrequests;
-  
+
   @OneToMany(mappedBy="fileUser", fetch=FetchType.LAZY)
   private List<FileData> fileData;
 
@@ -70,7 +70,7 @@ public class User {
 
 //Constructor
     public User( ) {}
-    
+
 //Getters and Setters
 	public Long getId() {
 		return id;
