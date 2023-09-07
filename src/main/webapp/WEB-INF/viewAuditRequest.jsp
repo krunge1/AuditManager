@@ -18,7 +18,7 @@
 <script src="/webjars/bootstrap/js/bootstrap.min.js"
 	type="text/javascript"></script>
 </head>
-<body>
+<body class="body">
 	<div class="text-bg-primary p-3">
 		<div class="d-flex justify-content-around">
 			<h1>Big4 Audit Manager</h1>
@@ -89,7 +89,7 @@
          </form:form>
        		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 			<c:forEach var="requestFiles" items="${requestFiles}">
-					<a href="/requests/download/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
+					<a href="/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
 			</c:forEach>
 	</div>
 	

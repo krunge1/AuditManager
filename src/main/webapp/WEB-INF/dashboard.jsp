@@ -15,14 +15,13 @@
 <title>Audit Manager</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/style.css"/>
-<script type="text/javascript" src="/script.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"
 	type="text/javascript"></script>
 </head>
-<body>
+<body class="body">
 	<div class="text-bg-primary p-3">
 		<div class="d-flex justify-content-around">
-			<h1 class="purple_text">Big4 Audit Manager</h1>
+			<h1 class="">Big4 Audit Manager</h1>
 			<div class="grid gap-0 column-gap-3 ">
 				<a
 					class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
