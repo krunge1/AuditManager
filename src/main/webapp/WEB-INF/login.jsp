@@ -14,8 +14,7 @@
 <meta charset="UTF-8">
 <title>Audit Manager</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/style.css">
-<script type="text/javascript" src="/script.js"></script>
+<link rel="stylesheet" type="text/css" href="../AuditItems/style.css"/>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"
 	type="text/javascript"></script>
 </head>
