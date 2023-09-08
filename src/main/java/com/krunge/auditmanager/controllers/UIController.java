@@ -31,6 +31,15 @@ public class UIController {
 		model.addAttribute("loginUser", new LoginUser());
 		return "login.jsp";
 	}
+	
+	@GetMapping("/register")
+	public String rLoginReg (
+			Model model
+			){
+		model.addAttribute("user", new User());
+		model.addAttribute("loginUser", new LoginUser());
+		return "register.jsp";
+	}
 
 	@GetMapping("/logout")
 		public String pLogout(HttpSession session) {

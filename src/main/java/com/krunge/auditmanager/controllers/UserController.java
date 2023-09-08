@@ -32,14 +32,14 @@ public class UserController {
 	//Tests if model requirements are met and renders the login page if error
 		if (result.hasErrors()) {
 			model.addAttribute("loginUser", new LoginUser());
-			return "login.jsp";
+			return "register.jsp";
 		}
 
 	//Service call and tests for database requirements
 		User u = userService.createOrUpdate(user, result);
 		if(u == null) {
 			model.addAttribute("loginUser", new LoginUser());
-			return "login.jsp";
+			return "register.jsp";
 		}
 
 

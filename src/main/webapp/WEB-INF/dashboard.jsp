@@ -20,9 +20,9 @@
 </head>
 <body class="body">
 	<div class="text-bg-primary p-3">
-		<div class="d-flex justify-content-around">
+		<div class="d-flex justify-content-around header">
 			<h1 class="">Big4 Audit Manager</h1>
-			<div class="grid gap-0 column-gap-3 ">
+			<div class="grid gap-0 column-gap-3 header_line_group">
 				<a
 					class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
 					href="/requests/new">New Request</a> 

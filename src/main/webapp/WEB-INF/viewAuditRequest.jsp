@@ -44,31 +44,31 @@
 				<strong><c:out value="${auditRequest.status}"/></strong>
 			</p>
 		</div>
-		<div class="row">
-			<p class="col-lg-3">Details:</p>
+		<div class="row d-flex justify-content-evenly">
+			<p class="col">Details:</p>
 			<p class="col">
 				<c:out value="${auditRequest.details}" />
 			</p>
 		</div>
-		<div class="row">
-			<p class="col-lg-3">Due Date:</p>
+		<div class="row d-flex justify-content-evenly">
+			<p class="col">Due Date:</p>
 			<p class="col">
 				<fmt:formatDate value="${auditRequest.dueDate}" pattern= "MM/dd/yyyy" var="formattedDueDate"/>
 				<c:out value="${formattedDueDate}" />
 			</p>
 		</div>
-	</div>
-	<div class="container-md mt-3 d-flex grid gap-3">
-		<c:choose>
-			<c:when test="${auditRequest.requestUser.id == userId}">
-				<form action="/requests/${auditRequest.id}/edit">
-					<button type="submit" class="btn btn-primary p-2 g-col-6" value="submit_form">Edit</button>
-				</form>
-				<form action="/requests/${auditRequest.id}/delete">
-					<button type="submit" class="btn btn-danger p-2 g-col-6" value="submit_form">Delete</button>
-				</form>
-			</c:when>
-		</c:choose>
+		<div class="container-md mt-3 d-flex grid gap-3">
+			<c:choose>
+				<c:when test="${auditRequest.requestUser.id == userId}">
+					<form action="/requests/${auditRequest.id}/edit">
+						<button type="submit" class="btn btn-primary p-2 g-col-6" value="submit_form">Edit</button>
+					</form>
+					<form action="/requests/${auditRequest.id}/delete">
+						<button type="submit" class="btn btn-danger p-2 g-col-6" value="submit_form">Delete</button>
+					</form>
+				</c:when>
+			</c:choose>
+		</div>
 	</div>
 	<div class="container-md form_box mt-3 grid gap-3">
 		<h2 class="text-decoration-underline mt-5">Comments</h2>
@@ -78,14 +78,14 @@
 		<form:form action="/requests/${auditRequest.id}/createComment" method="Post" modelAttribute="comment">
 			<form:errors path="text" class="text-danger" />
 			<form:textarea path="text" rows="3" class="col-lg-6" />
-			<button type="submit" class="btn btn-primary form_box mt-3 d-flex" value="New_Comment">Post Comment</button>
+			<button type="submit" class="btn btn-primary mt-3 d-flex" value="New_Comment">Post Comment</button>
 		</form:form>
 	</div>
 	<div class="container-md form_box mt-5 grid gap-3">
 	     <form:form action="/requests/${auditRequest.id}/uploadFile" method = "post"
 	         enctype = "multipart/form-data">
 	        <input type="file" name="file" class="form-control form-control-lg "/>
-	        <input type = "submit" value = "Upload File" class="btn btn-primary form_box mt-3 d-flex"/>
+	        <input type = "submit" value = "Upload File" class="btn btn-primary mt-3 d-flex"/>
          </form:form>
        		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 			<c:forEach var="requestFiles" items="${requestFiles}">

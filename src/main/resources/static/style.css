@@ -2,9 +2,13 @@
 	font-family: Helvetica;
 }
 
+.background_image{
+	background-image: url(/close-up-glasses-annual-summary.jpg);
+}
+
 .header{
     width: auto;
-    margin: 2em;
+    margin: 1em;
 }
 
 .header_line_group{
