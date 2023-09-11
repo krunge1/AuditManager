@@ -24,7 +24,7 @@ public class UIController {
 	private AuditRequestService auditRequestService;
 
 	@GetMapping("/")
-	public String rLoginReg (
+	public String rLogin (
 			Model model
 			){
 		model.addAttribute("user", new User());
@@ -33,7 +33,7 @@ public class UIController {
 	}
 	
 	@GetMapping("/register")
-	public String rLoginReg (
+	public String rRegister (
 			Model model
 			){
 		model.addAttribute("user", new User());

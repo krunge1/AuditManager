@@ -37,6 +37,13 @@
     padding: 2em;
 }
 
+.login_and_reg_box{
+    margin: auto;
+    width: 30%;
+    padding: 2em;
+    background: white;
+}
+
 .border{
 	border: 25px solid red;
 }
