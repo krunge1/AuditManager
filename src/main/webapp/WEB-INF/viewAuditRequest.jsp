@@ -70,7 +70,7 @@
 			</c:choose>
 		</div>
 	</div>
-	<div class="container-md form_box mt-3 grid gap-3">
+	<div class="container-md comment_and_file_box">
 		<h2 class="text-decoration-underline mt-5">Comments</h2>
 		<c:forEach var="requestComments" items="${requestComments}">
 				<p>${requestComments.text} <span class="fw-bold">${requestComments.commentUser.userName}</span></p>
@@ -81,7 +81,7 @@
 			<button type="submit" class="btn btn-primary mt-3 d-flex" value="New_Comment">Post Comment</button>
 		</form:form>
 	</div>
-	<div class="container-md form_box mt-5 grid gap-3">
+	<div class="container-md comment_and_file_box">
        		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 	     <form:form action="/requests/${auditRequest.id}/uploadFile" method = "post"
 	         enctype = "multipart/form-data">
@@ -89,7 +89,7 @@
 	        <input type = "submit" value = "Upload File" class="btn btn-primary mt-3 d-flex"/>
          </form:form>
 			<c:forEach var="requestFiles" items="${requestFiles}">
-					<a href="/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
+					<a href="/AuditItems/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
 			</c:forEach>
 	</div>
 	

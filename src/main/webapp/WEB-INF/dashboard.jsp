@@ -32,14 +32,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-md">
+	<div class="container-md mt-3">
 		<h2 class="text-decoration-underline">Assets</h2>
 		<table class="table table-striped table-light border border-dark">
 			<thead>
 				<tr>
-					<th>Request</th>
-					<th>Due Date</th>
-					<th>Status</th>
+					<th scope="col">Request</th>
+					<th scope="col">Due Date</th>
+					<th scope="col">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,9 +60,9 @@
 		<table class="table table-striped table-light border border-dark">
 			<thead>
 				<tr>
-					<th>Request</th>
-					<th>Due Date</th>
-					<th>Status</th>
+					<th scope="col">Request</th>
+					<th scope="col">Due Date</th>
+					<th scope="col">Status</th>
 				</tr>
 			</thead>
 			<tbody>

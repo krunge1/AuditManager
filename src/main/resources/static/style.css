@@ -39,6 +39,11 @@
     padding: 2em;
 }
 
+.comment_and_file_box{
+    margin: auto;
+    width: 60%;
+}
+
 .login_and_reg_box{
     margin: auto;
     width: 30%;
