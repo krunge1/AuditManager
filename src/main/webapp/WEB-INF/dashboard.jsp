@@ -19,7 +19,7 @@
 	type="text/javascript"></script>
 </head>
 <body class="body">
-	<div class="background_image text-bg-primary p-3">
+	<div class="text-bg-primary p-3">
 		<div class="d-flex justify-content-around header">
 			<h1 class="">Big4 Audit Manager</h1>
 			<div class="grid gap-0 column-gap-3 header_line_group">

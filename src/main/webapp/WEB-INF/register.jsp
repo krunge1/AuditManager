@@ -20,7 +20,7 @@
 <body class="body background_image">
 	<div class="container text center mx-auto m-5 login_and_reg_box">
 			<div class="col p-2 g-col-6 p-4">
-				<h1>Big 4 Audit Manager</h1>
+				<h1>Big4r</h1>
 				<form:form action="/user/register" method="post"
 					modelAttribute="user">
 					<div class="mb-3">

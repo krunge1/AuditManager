@@ -17,23 +17,23 @@
 <link rel="stylesheet" type="text/css" href="/style.css" />
 <script src="/webjars/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
-<body class="body c">
+<body class="body background_image">
 	<div class="container text center mx-auto m-5 login_and_reg_box">
 			<div class="col p-2 g-col-6 p-4">
-			<div class="">
-				<h1 class="header">Big 4 Audit Manager</h1>
+			<div class="display_flex">
+				<h1 class="header">Big4</h1>
 			</div>
 				<form:form action="/user/login" method="post"
 					modelAttribute="loginUser">
 					<div class="mb-3">
 						<form:label path="email" class="form-label col">Email:</form:label>
 						<form:errors path="email" class="text-danger" />
-						<form:input path="email" class="form-control" />
+						<form:input path="email" class="form-control" value="user@mail.com" />
 					</div>
 					<div class="mb-3">
 						<form:label path="password" class="form-label col">Password:</form:label>
 						<form:errors path="password" class="text-danger" />
-						<form:input path="password" type="password" class="form-control" />
+						<form:input path="password" type="password" class="form-control" value="Password1" />
 					</div>
 					<div class="display_flex">
 						<button type="submit" class="btn btn-primary" value="submit_form">Login</button>

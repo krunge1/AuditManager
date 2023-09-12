@@ -3,7 +3,9 @@
 }
 
 .background_image{
-	background-image: url(/close-up-glasses-annual-summary.jpg);
+	background-image: url(/auditImage.jpg);
+	background-repeat: no-repeat;
+  	background-size: cover;
 }
 
 .header{

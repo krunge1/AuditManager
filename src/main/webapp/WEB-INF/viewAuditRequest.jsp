@@ -20,7 +20,7 @@
 </head>
 <body class="body">
 	<div class="text-bg-primary p-3">
-		<div class="d-flex justify-content-around">
+		<div class="d-flex justify-content-around header">
 			<h1>Big4 Audit Manager</h1>
 			<div >
 				<a class="p-2 g-col-6 link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="/requests">Home</a> 
@@ -82,12 +82,12 @@
 		</form:form>
 	</div>
 	<div class="container-md form_box mt-5 grid gap-3">
+       		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 	     <form:form action="/requests/${auditRequest.id}/uploadFile" method = "post"
 	         enctype = "multipart/form-data">
 	        <input type="file" name="file" class="form-control form-control-lg "/>
 	        <input type = "submit" value = "Upload File" class="btn btn-primary mt-3 d-flex"/>
          </form:form>
-       		<h2 class="text-decoration-underline mt-5">Uploaded Files</h2>
 			<c:forEach var="requestFiles" items="${requestFiles}">
 					<a href="/${requestFiles.name}" download class="d-block p-2">${requestFiles.name}</a>
 			</c:forEach>
