@@ -16,19 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name = "files")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class FileData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +39,7 @@ public class FileData {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
-
+    
     private String filePath;
     private String name;
     private String filetype;
@@ -63,15 +52,66 @@ public class FileData {
     @JoinColumn(name = "auditRequest_id")
     private AuditRequest requestFile;
 
-    public FileData(Long id, Date createdAt, Date updatedAt, String filePath, String name, String filetype, User fileUser, AuditRequest requestFile) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.filePath = filePath;
-        this.name = name;
-        this.filetype = filetype;
-        this.fileUser = fileUser;
-        this.requestFile = requestFile;
-    }
+    //Constructor
+    public FileData() {}
+
+    //Getters and Setters
+    
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFiletype() {
+		return filetype;
+	}
+
+	public void setFiletype(String filetype) {
+		this.filetype = filetype;
+	}
+
+	public User getFileUser() {
+		return fileUser;
+	}
+
+	public void setFileUser(User fileUser) {
+		this.fileUser = fileUser;
+	}
+
+	public AuditRequest getRequestFile() {
+		return requestFile;
+	}
+
+	public void setRequestFile(AuditRequest requestFile) {
+		this.requestFile = requestFile;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	};
+    
 
 }

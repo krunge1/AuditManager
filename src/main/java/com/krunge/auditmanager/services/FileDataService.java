@@ -31,20 +31,40 @@ public class FileDataService {
 		User user = userRepo.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 		AuditRequest auditRequest = auditRequestRepo.findById(auditRequestId).orElseThrow(() -> new IllegalArgumentException("Audit Request not found"));
 
-		FileData newFile = FileData.builder()
-				.name(file.getOriginalFilename())
-				.filetype(file.getContentType())
-				.filePath(file.getOriginalFilename())
-				.build();
-		newFile.setRequestFile(auditRequest);
-		newFile.setFileUser(user);
-		this.fileDataRepo.save(newFile);
-		if(newFile != null) {
-			System.out.println(file.getOriginalFilename());
-			return "Upload Successful"+ file.getOriginalFilename();
-		}
-		return null;
-	}
+		FileData newFile = new FileData();
+				newFile.setName(file.getOriginalFilename());
+				newFile.setFilePath(file.getOriginalFilename());
+				newFile.setRequestFile(auditRequest);
+				newFile.setFileUser(user);
+				this.fileDataRepo.save(newFile);
+	
+				if(newFile != null) {
+					System.out.println(file.getOriginalFilename());
+					return "Upload Successful"+ file.getOriginalFilename();
+				}
+				return null;
+			}
+	
+	
+//	public String uploadAuditFil(MultipartFile file, Long userId, Long auditRequestId) {
+//		//Retrieve User and Audit Request
+//		User user = userRepo.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+//		AuditRequest auditRequest = auditRequestRepo.findById(auditRequestId).orElseThrow(() -> new IllegalArgumentException("Audit Request not found"));
+//
+//		FileData newFile = FileData.builder()
+//				.name(file.getOriginalFilename())
+//				.filetype(file.getContentType())
+//				.filePath(file.getOriginalFilename())
+//				.build();
+//		newFile.setRequestFile(auditRequest);
+//		newFile.setFileUser(user);
+//		this.fileDataRepo.save(newFile);
+//		if(newFile != null) {
+//			System.out.println(file.getOriginalFilename());
+//			return "Upload Successful"+ file.getOriginalFilename();
+//		}
+//		return null;
+//	}
 
 	//Get all Files
 		public List <FileData> getAll(){

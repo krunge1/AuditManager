@@ -75,7 +75,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+		    <version>1.18.22</version> <!-- Use the latest version -->
+   			<scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>jakarta.activation</groupId>
@@ -100,5 +101,4 @@
 		</plugins>
 	</build>
 
-	<packaging>war</packaging>
 </project>
